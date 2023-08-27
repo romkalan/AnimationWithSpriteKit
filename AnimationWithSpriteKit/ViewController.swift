@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         let scene = makeScene()
         animationView.frame.size = scene.size
         animationView.presentScene(scene)
+        
+        addEmoji(to: scene)
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,6 +47,28 @@ extension ViewController {
         let scene = SKScene(size: size)
         scene.backgroundColor = .white
         return scene
+    }
+    
+    func addEmoji(to scene: SKScene) {
+        let emojies: [Character] = ["🌽", "🌭", "🧀", "🍤"]
+        let distance = floor(scene.size.width / 4)
+        
+        for (index, emoji) in emojies.enumerated() {
+            let node = SKLabelNode()
+            node.renderEmoji(emoji)
+            node.position.y = floor(scene.size.width / 2)
+            node.position.x = distance * CGFloat(index) + 50
+            scene.addChild(node)
+        }
+    }
+}
+
+extension SKLabelNode {
+    func renderEmoji(_ emoji: Character) {
+        fontSize = 50
+        text = String(emoji)
+        verticalAlignmentMode = .center
+        horizontalAlignmentMode = .center
     }
 }
 
