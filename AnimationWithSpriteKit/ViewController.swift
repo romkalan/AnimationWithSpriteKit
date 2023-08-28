@@ -59,6 +59,24 @@ extension ViewController {
             node.position.y = floor(scene.size.width / 2)
             node.position.x = distance * CGFloat(index) + 50
             scene.addChild(node)
+            animateNode(scene.children)
+        }
+    }
+    
+    func animateNode(_ nodes: [SKNode]) {
+        for (index, node) in nodes.enumerated() {
+            let delayAction = SKAction.wait(forDuration: TimeInterval(index) * 0.2)
+            
+            let scaleUpAction = SKAction.scale(to: 1.5, duration: 0.3)
+            let scaleDownAction = SKAction.scale(to: 1, duration: 0.3)
+            let waitAction = SKAction.wait(forDuration: 2)
+            
+            let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleDownAction, waitAction])
+            
+            let repeatAction = SKAction.repeatForever(scaleActionSequence)
+            let actionSequence = SKAction.sequence([delayAction, repeatAction])
+            
+            node.run(actionSequence)
         }
     }
 }
