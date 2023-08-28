@@ -69,11 +69,16 @@ extension ViewController {
             
             let scaleUpAction = SKAction.scale(to: 1.5, duration: 0.3)
             let scaleDownAction = SKAction.scale(to: 1, duration: 0.3)
+            let rotateAction = SKAction.rotate(byAngle: .pi, duration: 1.5)
+            
+            let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleDownAction])
+            let groupAction = SKAction.group([scaleActionSequence, rotateAction])
+            
             let waitAction = SKAction.wait(forDuration: 2)
             
-            let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleDownAction, waitAction])
+            let groupSequenceAction = SKAction.sequence([groupAction, waitAction])
             
-            let repeatAction = SKAction.repeatForever(scaleActionSequence)
+            let repeatAction = SKAction.repeatForever(groupSequenceAction)
             let actionSequence = SKAction.sequence([delayAction, repeatAction])
             
             node.run(actionSequence)
