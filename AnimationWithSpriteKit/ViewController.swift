@@ -26,8 +26,6 @@ class ViewController: UIViewController {
         animationView.frame.size = scene.size
         addEmoji(to: scene)
         animationView.presentScene(scene)
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
