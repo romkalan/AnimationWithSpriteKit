@@ -24,9 +24,10 @@ class ViewController: UIViewController {
         
         let scene = makeScene()
         animationView.frame.size = scene.size
+        addEmoji(to: scene)
         animationView.presentScene(scene)
         
-        addEmoji(to: scene)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -69,7 +70,7 @@ extension ViewController {
             
             let scaleUpAction = SKAction.scale(to: 1.5, duration: 0.3)
             let scaleDownAction = SKAction.scale(to: 1, duration: 0.3)
-            let rotateAction = SKAction.rotate(byAngle: .pi, duration: 1.5)
+            let rotateAction = SKAction.rotate(byAngle: .pi * 2, duration: 1.5)
             
             let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleDownAction])
             let groupAction = SKAction.group([scaleActionSequence, rotateAction])
